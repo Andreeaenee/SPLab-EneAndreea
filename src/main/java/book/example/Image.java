@@ -1,18 +1,28 @@
 package book.example;
 
-public class Image {
+public class Image implements Element {
+    public String ImageName;
 
-    private String imageName;
-
-    public Image(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public String getImageName() {
-        return imageName;
+    public Image(String ImageName) {
+        this.ImageName = ImageName;
     }
 
     public void print() {
-        System.out.println("Image with name: " + imageName);
+        System.out.println("Image with name : " + ImageName);
+    }
+
+    @Override
+    public void add(Element a) {
+
+    }
+
+    @Override
+    public Element get(int nr) {
+        return null;
+    }
+
+    @Override
+    public void remove(Element a) {
+
     }
 }

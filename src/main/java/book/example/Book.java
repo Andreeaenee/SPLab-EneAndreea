@@ -1,57 +1,49 @@
 package book.example;
 
-import lombok.Getter;
-
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
-public class Book {
-    private String titlu;
-    private TableOfContents tableOfContents;
+public class Book extends Section{
+    public String title;
+    public List<Author> au = new ArrayList<Author>();
+    public TableOfContents tb;
 
-
-
-    @Getter
-    private ArrayList<Chapter> chapters;
-    @Getter
-    private ArrayList<Author> authors;
-
-    public Book(String titlu)
-    {
-        this.titlu = titlu;
-        chapters = new ArrayList<>();
-        authors = new ArrayList<>();
-    }
-    public int addChapter(Chapter chapter) {
-        chapters.add(chapter);
-        return chapters.size()-1;
-    }
-
-
-    public void addAuthor(Author author) {
-        authors.add(author);
-    }
-
-    public Chapter getChapter(int index) {
-        if (index >= 0 && index < chapters.size()) {
-            return chapters.get(index);
-        }
-        return null;
+    public Book(String title) {
+        super(title);
+        this.title = title;
     }
 
     public void print() {
-        System.out.println("Book:");
-
+        System.out.println("Book: " + title);
+        System.out.println();
         System.out.println("Authors:");
-        for (Author author : authors) {
-            author.print();
+        for (Author a : au) {
+            a.print();
         }
 
-        System.out.println("Chapters:");
-        for (Chapter chapter : chapters) {
-            chapter.print();
+        System.out.println();
+        for (Element et : el) {
+            et.print();
         }
-
     }
 
+    public void addAuthor(Author nume) {
+        au.add(nume);
+    }
 
+    public void addContent(Element a) {
+        el.add(a);
+    }
+//    public int createChapter(String nume)
+//    { Chapter a = new Chapter();
+//        a.name=nume;
+//        ch.add(a);
+//        return ch.indexOf(a);
+//    }
+//    public Chapter getChapter(int nr)
+//    {
+//        return ch.get(nr);
+//    }
 }
+
