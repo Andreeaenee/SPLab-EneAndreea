@@ -1,7 +1,4 @@
-package book.example;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.example.spproject;
 
 public interface Element {
 

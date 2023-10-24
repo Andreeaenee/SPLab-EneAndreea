@@ -1,15 +1,10 @@
-package book.example;
+package com.example.spproject;
 
+import com.example.spproject.Element;
 
-public class Paragraph implements Element {
-    public String text;
-
-    public Paragraph(String text) {
-        this.text = text;
-    }
-
+public class TableOfContents implements Element {
+    @Override
     public void print() {
-        System.out.println("Paragraph: " + text);
     }
 
     @Override
@@ -27,3 +22,4 @@ public class Paragraph implements Element {
 
     }
 }
+

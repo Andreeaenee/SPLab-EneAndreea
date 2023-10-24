@@ -1,5 +1,7 @@
-package book.example;
+package com.example.spproject;
 
+
+import com.example.spproject.Element;
 
 public class Table implements Element {
     public String title;

@@ -1,12 +1,12 @@
 package book.example;
 
-import org.springframework.boot.SpringApplication;
+import com.example.spproject.*;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception{
         //SpringApplication.run(DesignPatternsLab2023Application.class, args);
         Book noapteBuna = new Book("Noapte buna, copii!");
         Author rpGheo = new Author("Radu Pavel Gheo");
@@ -26,7 +26,31 @@ public class Main {
         cap111.add(cap1111);
         cap1111.add(new Image("Image subchapter 1.1.1.1"));
         noapteBuna.print();
-
+//        long startTime = System.currentTimeMillis();
+//        Image img1 = new Image("Pamela Anderson");
+//        Image img2 = new Image("Kim Kardashian");
+//        Image img3 = new Image("Kirby Griffin");
+//        Section playboyS1 = new Section("Front Cover");
+//        playboyS1.add(img1);
+//        Section playboyS2 = new Section("Summer Girls");
+//        playboyS2.add(img2);
+//        playboyS2.add(img3);
+//        Book playboy = new Book("Playboy");
+//        playboy.addContent(playboyS1);
+//        playboy.addContent(playboyS2);
+//        long endTime = System.currentTimeMillis();
+//        System.out.println("Creation of the content took " + (endTime - startTime) + " milliseconds");
+//
+//        startTime = System.currentTimeMillis();
+//        playboyS1.print();
+//        endTime = System.currentTimeMillis();
+//
+//        System.out.println("Printing of the section 1 took " + (endTime - startTime) + " milliseconds");
+//        startTime = System.currentTimeMillis();
+//        playboyS1.print();
+//        endTime = System.currentTimeMillis();
+//
+//        System.out.println("Printing again the section 1 took " + (endTime - startTime) + " milliseconds");
     }
 
 }
