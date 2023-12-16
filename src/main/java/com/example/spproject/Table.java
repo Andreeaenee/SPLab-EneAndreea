@@ -1,35 +1,26 @@
 package com.example.spproject;
 
 
-import com.example.spproject.Element;
 
-public class Table implements Element {
-    public String title;
+import java.util.ArrayList;
 
+public class Table extends Element {
+    private String title;
     public Table(String title) {
         this.title = title;
     }
-
-    public Table() {
-        this.title = "";
-    }
-
-    public void print() {
-        System.out.println("Table with name : " + title);
+    public Table(Table other){
+        this.title = other.title;
+        this.elementList = new ArrayList<>(other.elementList);
     }
 
     @Override
-    public void add(Element a) {
-
+    public void print(){
+        System.out.println("Table with Title: " + title);
     }
 
     @Override
-    public Element get(int nr) {
-        return null;
-    }
-
-    @Override
-    public void remove(Element a) {
-
+    public Element clone() {
+        return new Table(this);
     }
 }

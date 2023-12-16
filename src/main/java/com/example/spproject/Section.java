@@ -1,40 +1,33 @@
 package com.example.spproject;
 
-
-import com.example.spproject.Element;
-
 import java.util.ArrayList;
-import java.util.List;
 
-public class Section implements Element {
-    public String title;
-
-    public List<Element> el = new ArrayList<>();
+public class Section extends Element {
+    protected String title;
 
     public Section(String title) {
         this.title = title;
+        elementList = new ArrayList<>();
+    }
+
+    public Section(Section other){
+        this.title = other.title;
+        this.elementList = new ArrayList<>(other.elementList);
     }
 
     @Override
     public void print() {
         System.out.println(title);
-        for (Element e : el) {
-            e.print();
+        for (Element element :
+                elementList) {
+            element.print();
         }
     }
 
-    @Override
-    public void add(Element a) {
-        el.add(a);
-    }
+
 
     @Override
-    public Element get(int nr) {
-        return null;
-    }
-
-    @Override
-    public void remove(Element a) {
-
+    public Element clone() {
+        return new Section(this);
     }
 }

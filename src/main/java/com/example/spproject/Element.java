@@ -1,13 +1,27 @@
 package com.example.spproject;
 
-public interface Element {
 
-    void print();
+import java.util.ArrayList;
+import java.util.List;
 
-    void add(Element a);
+public abstract class Element {
 
-    Element get(int nr);
+    protected List<Element> elementList;
+    public Element() {
+        this.elementList = new ArrayList<>();
+    }
 
-    void remove(Element a);
+    public void add(Element e) {
+//        elementList.add(e.clone());
+        elementList.add(e);
+    }
+    public void remove(Element e) {
+        elementList.remove(e);
+    }
+    public Element get(int index) {
+        return elementList.get(index);
+    }
 
+    public abstract void print();
+    public abstract Element clone();
 }

@@ -1,31 +1,29 @@
 package com.example.spproject;
 
+import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
-import com.example.spproject.Element;
-
-public class Paragraph implements Element {
-    public String text;
-
+public class Paragraph extends Element {
+    @Getter
+    private final String text;
+    @Setter
+    private AlignStrategy alignStrategy;
     public Paragraph(String text) {
         this.text = text;
     }
-
-    public void print() {
-        System.out.println("Paragraph: " + text);
-    }
+    public Paragraph(Paragraph other){this.text = other.text;}
 
     @Override
-    public void add(Element a) {
-
+    public void print(){
+        if(alignStrategy != null)
+            alignStrategy.render(text);
+        else new AlignLeft().render(text);
     }
-
     @Override
-    public Element get(int nr) {
-        return null;
+    public Element clone() {
+        return new Paragraph(this);
     }
 
-    @Override
-    public void remove(Element a) {
-
-    }
 }
+

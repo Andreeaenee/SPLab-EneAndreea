@@ -1,9 +1,8 @@
 package com.example.spproject;
 
-import java.awt.*;
-
 public interface Picture {
+    public String getUrl();
+//    public Dimension dim();
+//    public PictureContent content();
 
-    String url();
-    Dimension dim();
 }

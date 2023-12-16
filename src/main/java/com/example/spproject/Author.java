@@ -1,20 +1,27 @@
 package com.example.spproject;
 
-import lombok.Getter;
-
-@Getter
 public class Author {
-    public String name;
+
+    private String name;
+    private String surname;
 
     public Author(String name) {
         this.name = name;
     }
 
-    public void setName(String name) {
+    public Author(String name, String surname) {
         this.name = name;
+        this.surname = surname;
     }
 
-    public void print() {
-        System.out.println("Author: " + name);
+    public Author(Author author){
+        this.name = author.name;
+        this.surname = author.surname;
     }
+
+
+
+   public void print(){
+       System.out.println("Author: " + name);
+   }
 }

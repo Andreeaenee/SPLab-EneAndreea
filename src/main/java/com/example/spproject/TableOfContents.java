@@ -1,25 +1,21 @@
 package com.example.spproject;
 
-import com.example.spproject.Element;
+import java.util.ArrayList;
 
-public class TableOfContents implements Element {
-    @Override
-    public void print() {
+public class TableOfContents extends Element {
+    public TableOfContents(){
+        elementList = new ArrayList<>();
+    }
+
+    public TableOfContents(TableOfContents other){
+        elementList = new ArrayList<>(other.elementList);
     }
 
     @Override
-    public void add(Element a) {
-
-    }
+    public void print(){}
 
     @Override
-    public Element get(int nr) {
-        return null;
-    }
-
-    @Override
-    public void remove(Element a) {
-
+    public Element clone() {
+        return new TableOfContents(this);
     }
 }
-

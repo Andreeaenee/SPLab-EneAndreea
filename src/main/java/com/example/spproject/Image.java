@@ -1,49 +1,36 @@
 package com.example.spproject;
 
-import com.example.spproject.Element;
 
-import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-public class Image implements Element, Picture {
-    public String ImageName;
+public class Image extends Element implements Picture {
+    private String url;
+    private String imageContent;
 
-    public Image(String ImageName) {
-        this.ImageName = ImageName;
-            try {
-                TimeUnit.SECONDS.sleep(5);
-            } catch (InterruptedException e){
-                e.printStackTrace();
-            }
+    public Image(String url) {
+        this.url = url;
+        try {
+            TimeUnit.SECONDS.sleep(5);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public Image(Image other){
+        url = other.url;
+    }
+
+    public void print(){
+        System.out.println("Image with name: " + url);
     }
 
     @Override
-    public String url() {
-        return null;
+    public Element clone() {
+        return new Image(this);
     }
 
     @Override
-    public Dimension dim() {
-        return null;
-    }
-
-
-    public void print() {
-        System.out.println("Image with name : " + ImageName);
-    }
-
-    @Override
-    public void add(Element a) {
-
-    }
-
-    @Override
-    public Element get(int nr) {
-        return null;
-    }
-
-    @Override
-    public void remove(Element a) {
-
+    public String getUrl() {
+        return url;
     }
 }
