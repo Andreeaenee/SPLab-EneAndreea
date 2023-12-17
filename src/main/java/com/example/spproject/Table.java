@@ -1,10 +1,10 @@
 package com.example.spproject;
 
-
-
 import java.util.ArrayList;
+import lombok.Getter;
 
-public class Table extends Element {
+public class Table extends Element implements Visitee{
+    @Getter
     private String title;
     public Table(String title) {
         this.title = title;
@@ -13,10 +13,8 @@ public class Table extends Element {
         this.title = other.title;
         this.elementList = new ArrayList<>(other.elementList);
     }
-
-    @Override
-    public void print(){
-        System.out.println("Table with Title: " + title);
+    public void accept(Visitor visitor) {
+        visitor.visitTable(this);
     }
 
     @Override

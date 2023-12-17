@@ -1,4 +1,4 @@
-package com.example.spproject;
+package com.example.spproject.services;
 
 import javax.naming.Context;
 

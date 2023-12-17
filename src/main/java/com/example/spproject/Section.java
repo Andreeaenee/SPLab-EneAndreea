@@ -1,8 +1,10 @@
 package com.example.spproject;
 
 import java.util.ArrayList;
+import lombok.Getter;
 
-public class Section extends Element {
+public class Section extends Element implements Visitee{
+    @Getter
     protected String title;
 
     public Section(String title) {
@@ -16,15 +18,9 @@ public class Section extends Element {
     }
 
     @Override
-    public void print() {
-        System.out.println(title);
-        for (Element element :
-                elementList) {
-            element.print();
-        }
+    public void accept(Visitor visitor) {
+        visitor.visitSection(this);
     }
-
-
 
     @Override
     public Element clone() {

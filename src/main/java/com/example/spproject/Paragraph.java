@@ -4,21 +4,17 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Paragraph extends Element {
+public class Paragraph extends Element implements Visitee{
     @Getter
     private final String text;
-    @Setter
-    private AlignStrategy alignStrategy;
     public Paragraph(String text) {
         this.text = text;
     }
     public Paragraph(Paragraph other){this.text = other.text;}
 
     @Override
-    public void print(){
-        if(alignStrategy != null)
-            alignStrategy.render(text);
-        else new AlignLeft().render(text);
+    public void accept(Visitor visitor) {
+        visitor.visitParagraph(this);
     }
     @Override
     public Element clone() {

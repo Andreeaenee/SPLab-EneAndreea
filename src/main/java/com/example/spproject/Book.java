@@ -2,8 +2,10 @@ package com.example.spproject;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
 
-public class Book extends Section {
+@Getter
+public class Book extends Section implements Visitee {
     private List<Author> authorList;
     public Book(String title) {
         super(title);
@@ -14,26 +16,9 @@ public class Book extends Section {
         super(other.title);
         this.authorList = new ArrayList<>(other.authorList);
     }
-
-
     @Override
-    public void print(){
-        System.out.println("Book: " + title );
-        System.out.println();
-
-        System.out.println("Authors: ");
-        for (Author author :
-                authorList) {
-            author.print();
-        }
-        System.out.println();
-
-        for (Element element :
-                elementList) {
-            element.print();
-        }
-
-
+    public void accept(Visitor visitor) {
+        visitor.visitBook(this);
     }
 
     public void addAuthor(Author author) {
