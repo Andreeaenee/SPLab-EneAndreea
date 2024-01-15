@@ -2,7 +2,11 @@ package com.example.spproject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 public class Book extends Section implements Visitee {
@@ -16,13 +20,14 @@ public class Book extends Section implements Visitee {
         super(other.title);
         this.authorList = new ArrayList<>(other.authorList);
     }
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visitBook(this);
-    }
 
     public void addAuthor(Author author) {
         this.authorList.add(new Author(author));
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitBook(this);
     }
 
 }

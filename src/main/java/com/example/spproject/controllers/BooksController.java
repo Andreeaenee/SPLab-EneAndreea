@@ -1,59 +1,60 @@
 package com.example.spproject.controllers;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.example.spproject.services.*;
-import com.example.spproject.*;
+import com.example.spproject.services.BookStatistics;
 import org.springframework.web.bind.annotation.*;
-
+import com.example.spproject.Book;
 
 import java.util.*;
 
 
 @RestController
 @RequestMapping("/books")
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
+
 public class BooksController {
-    private BookServices books = new BookServices();
-    CommandAddBook addBook;
-    CommandUpdateBook updateBook;
-    CommandDeleteBook deleteBook;
-    CommandGetAllBooks getAll;
-    CommandGetBookById getBookById;
+    private final CommandContext context;
 
+    private final AsyncExecutor asyncExecutor;
 
-    public BooksController() {
-        this.addBook = new CommandAddBook(books);
-        this.updateBook = new CommandUpdateBook(books);
-        this.deleteBook = new CommandDeleteBook(books);
-        this.getAll = new CommandGetAllBooks(books);
-        this.getBookById = new CommandGetBookById(books);
-    }
+    private final SyncExecutor syncExecutor;
 
-    @PostMapping
-    public Book addBook(@RequestBody Book newBook) {
-        addBook.setAtributte(newBook);
-        return addBook.execute();
-    }
-
-    @PutMapping("/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
-        this.updateBook.setAtribute(id, updatedBook);
-        return this.updateBook.execute();
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteBook(@PathVariable Long id) {
-        this.deleteBook.setAtribute(id);
-        this.deleteBook.execute();
-    }
 
     @GetMapping
-    public List<Book> getAllBooks() {
-        return getAll.execute();
+    public ResponseEntity<?> getAllBooks() {
+        CommandGetAllBooks cmd = new CommandGetAllBooks();
+        syncExecutor.executeCommand(cmd, context);
+        return new ResponseEntity<>(cmd.getResults(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Book getBookById(@PathVariable Long id) {
-        this.getBookById.setId(id);
-        return getBookById.execute();
+    public ResponseEntity<?> getBookById(@PathVariable Long id) {
+        CommandGetBookById cmd = new CommandGetBookById(id);
+        syncExecutor.executeCommand(cmd, context);
+        return new ResponseEntity<>(cmd.getResultBook(), HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> addBook(@RequestBody Map<String, Object> request) {
+        CommandAddBook cmd = new CommandAddBook(request);
+        asyncExecutor.executeCommand(cmd, context);
+        return new ResponseEntity<>(cmd.getResults(), HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+        CommandUpdateBook cmd = new CommandUpdateBook(id, updatedBook);
+        asyncExecutor.executeCommand(cmd, context);
+        return new ResponseEntity<>(cmd.getResults(), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteBook(@PathVariable Long id) {
+        CommandDeleteBook cmd = new CommandDeleteBook(id);
+        asyncExecutor.executeCommand(cmd, context);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

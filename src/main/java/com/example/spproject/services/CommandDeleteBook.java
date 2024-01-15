@@ -1,21 +1,13 @@
 package com.example.spproject.services;
 
-public class CommandDeleteBook implements Command<Void> {
+import lombok.RequiredArgsConstructor;
 
-    private BookServices books;
-    private Long id;
+@RequiredArgsConstructor
+public class CommandDeleteBook implements Command {
 
-    @Override
-    public Void execute() {
-        books.deleteBook(id);
-        return null;
-    }
+    private final Long id;
 
-    public CommandDeleteBook(BookServices contextBooks) {
-        this.books = contextBooks;
-    }
-
-    public void setAtribute(Long id){
-        this.id = id;
+    public void execute(CommandContext context) {
+        context.getBookRepository().deleteBook(id);
     }
 }

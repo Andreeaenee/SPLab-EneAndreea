@@ -1,21 +1,22 @@
 package com.example.spproject.services;
 import com.example.spproject.Book;
-public class CommandUpdateBook implements Command<Book>{
 
-    private BookServices books;
-    private Book newBook;
-    private Long id;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+public class CommandUpdateBook implements Command {
+
+    private final Long id;
+    private final Book book; //copie
+    Book result;
+
     @Override
-    public Book execute() {
-        books.updateBook(id,newBook);
-        return books.getBookById(id);
-    }
-    public CommandUpdateBook(BookServices contextBooks){
-        this.books = contextBooks;
+    public void execute(CommandContext context) {
+        result = context.getBookRepository().createBook(book);
     }
 
-    public void setAtribute(Long id, Book newBook){
-        this.id = id;
-        this.newBook = newBook;
+    public Book getResults() {
+        return result;
     }
 }

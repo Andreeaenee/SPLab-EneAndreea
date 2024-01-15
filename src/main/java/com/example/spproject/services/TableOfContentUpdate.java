@@ -1,14 +1,15 @@
 package com.example.spproject.services;
 
+
 import lombok.Getter;
 import com.example.spproject.*;
 
-@Getter
 public class TableOfContentUpdate implements Visitor<Void> {
-    private TableOfContents tableOfContents;
+    @Getter
+    private TableOfContents toC;
 
     public TableOfContentUpdate() {
-        tableOfContents = new TableOfContents();
+        toC = new TableOfContents();
     }
 
     @Override
@@ -22,7 +23,7 @@ public class TableOfContentUpdate implements Visitor<Void> {
 
     @Override
     public Void visitSection(Section section) {
-        tableOfContents.addEntry(section.getTitle());
+        toC.addEntry(section.getTitle());
         for (Element element :
                 section.getElementList()) {
             element.accept(this);
@@ -31,13 +32,13 @@ public class TableOfContentUpdate implements Visitor<Void> {
     }
 
     @Override
-    public Void visitTableOfContents(TableOfContents tableOfContents) {
+    public Void visitTableOfContents(TableOfContents toc) {
         return null;
     }
 
     @Override
     public Void visitParagraph(Paragraph paragraph) {
-        tableOfContents.addEntry(null);
+        toC.addEntry(null);
         return null;
     }
 
@@ -49,13 +50,13 @@ public class TableOfContentUpdate implements Visitor<Void> {
 
     @Override
     public Void visitImage(Image image) {
-        tableOfContents.addEntry(null);
+        toC.addEntry(null);
         return null;
     }
 
     @Override
     public Void visitTable(Table table) {
-        tableOfContents.addEntry(null);
+        toC.addEntry(null);
         return null;
     }
 

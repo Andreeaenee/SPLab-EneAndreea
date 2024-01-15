@@ -5,7 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-public abstract class Element implements Visitee{
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Element implements Visitee {
 
     @Getter
     protected List<Element> elementList;
@@ -14,7 +17,7 @@ public abstract class Element implements Visitee{
     }
 
     public void add(Element e) {
-//        elementList.add(e.clone());
+//        el
         elementList.add(e);
     }
     public void remove(Element e) {
@@ -24,11 +27,12 @@ public abstract class Element implements Visitee{
         return elementList.get(index);
     }
 
-    public  void print() {
+    public abstract Element clone();
+
+    public void print() {
         for (Element element :
                 elementList) {
             element.print();
         }
-    };
-    public abstract Element clone();
+    }
 }

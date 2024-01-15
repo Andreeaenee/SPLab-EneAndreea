@@ -1,14 +1,19 @@
 package com.example.spproject.services;
+import lombok.RequiredArgsConstructor;
 import com.example.spproject.Book;
+
 import java.util.List;
 
-public class CommandGetAllBooks implements Command<List<Book>>{
-    private BookServices books;
+@RequiredArgsConstructor
+public class CommandGetAllBooks implements Command {
+    List<Book> result;
 
-    public List<Book> execute() {
-        return books.getBooks();
+    @Override
+    public void execute(CommandContext context) {
+        result = context.getBookRepository().getBooks();
     }
-    public CommandGetAllBooks(BookServices contextBooks){
-        this.books=contextBooks;
+
+    public List<Book> getResults() {
+        return result;
     }
 }

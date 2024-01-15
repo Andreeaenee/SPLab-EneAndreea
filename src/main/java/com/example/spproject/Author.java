@@ -27,9 +27,11 @@ public class Author implements Visitee {
     public void accept(Visitor visitor) {
         visitor.visitAuthor(this);
     }
-
-
-   public void print(){
-       System.out.println("Author: " + name);
-   }
+    public void print(){
+        System.out.println("Author: " + name);
+    }
 }
+
+
+
+

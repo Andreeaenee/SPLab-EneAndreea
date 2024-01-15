@@ -1,9 +1,12 @@
 package com.example.spproject;
 
-import java.util.ArrayList;
 import lombok.Getter;
 
-public class Section extends Element implements Visitee{
+import java.util.ArrayList;
+
+public class Section extends Element implements Visitee {
+
+
     @Getter
     protected String title;
 
@@ -17,13 +20,17 @@ public class Section extends Element implements Visitee{
         this.elementList = new ArrayList<>(other.elementList);
     }
 
-    @Override
-    public void accept(Visitor visitor) {
-        visitor.visitSection(this);
-    }
+
+
+
 
     @Override
     public Element clone() {
         return new Section(this);
+    }
+
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitSection(this);
     }
 }

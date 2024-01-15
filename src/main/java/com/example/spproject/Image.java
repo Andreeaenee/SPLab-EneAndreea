@@ -1,5 +1,7 @@
 package com.example.spproject;
 
+import java.util.concurrent.TimeUnit;
+
 import lombok.Getter;
 
 public class Image extends Element implements Visitee {
@@ -9,10 +11,11 @@ public class Image extends Element implements Visitee {
     public Image(String imageName) {
         this.imageName = imageName;
     }
-
-    public Image(Image other) {
-        this.imageName = other.imageName;
+    public Image(Image other){
+        imageName = other.imageName;
     }
+
+
 
     @Override
     public void add(Element e) {
