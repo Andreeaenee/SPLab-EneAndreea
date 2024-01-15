@@ -1,5 +1,5 @@
 package com.example.spproject.services;
-import com.example.spproject.Book;
+import com.example.spproject.Entity.Book;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ public class CommandUpdateBook implements Command {
 
     @Override
     public void execute(CommandContext context) {
-        result = context.getBookRepository().createBook(book);
+        result = context.getBookRepository().save(book);
     }
 
     public Book getResults() {

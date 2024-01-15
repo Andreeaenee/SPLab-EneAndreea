@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import com.example.spproject.services.*;
 import com.example.spproject.services.BookStatistics;
 import org.springframework.web.bind.annotation.*;
-import com.example.spproject.Book;
+import com.example.spproject.Entity.Book;
 
 import java.util.*;
 

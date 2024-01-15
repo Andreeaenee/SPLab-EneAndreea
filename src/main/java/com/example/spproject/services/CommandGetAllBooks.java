@@ -1,6 +1,7 @@
 package com.example.spproject.services;
 import lombok.RequiredArgsConstructor;
-import com.example.spproject.Book;
+import com.example.spproject.Entity.Book;
+
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public class CommandGetAllBooks implements Command {
 
     @Override
     public void execute(CommandContext context) {
-        result = context.getBookRepository().getBooks();
+        result = context.getBookRepository().findAll();
     }
 
     public List<Book> getResults() {

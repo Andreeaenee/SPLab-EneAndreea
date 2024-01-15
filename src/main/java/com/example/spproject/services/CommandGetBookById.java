@@ -1,6 +1,6 @@
 package com.example.spproject.services;
 import lombok.RequiredArgsConstructor;
-import com.example.spproject.Book;
+import com.example.spproject.Entity.Book;
 
 @RequiredArgsConstructor
 
@@ -11,7 +11,7 @@ public class CommandGetBookById implements Command {
     Book result = null;
 
     public void execute(CommandContext context) {
-        result = context.getBookRepository().getBookById(id);
+        result = context.getBookRepository().findById(id).get();
     }
 
     public Book getResultBook() {

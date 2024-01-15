@@ -1,7 +1,6 @@
 package com.example.spproject.services;
-import com.example.spproject.Book;
 import lombok.RequiredArgsConstructor;
-
+import com.example.spproject.Entity.Book;
 
 import java.util.Map;
 
@@ -14,7 +13,9 @@ public class CommandAddBook implements Command {
 
     @Override
     public void execute(CommandContext context) {
-        result = context.getBookRepository().createBook(new Book((String) request.get("Titlu")));
+        //result = context.getBookRepository().save(new Book((String) request.get("Titlu")));
+        Book carte = new Book();
+        result = context.getBookRepository().save(carte);
     }
 
     public Book getResults() {
