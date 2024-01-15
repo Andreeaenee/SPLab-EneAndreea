@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.example.spproject.services.*;
-import com.example.spproject.services.BookStatistics;
 import org.springframework.web.bind.annotation.*;
 import com.example.spproject.Entity.Book;
 
@@ -22,6 +21,8 @@ public class BooksController {
 
     private final SyncExecutor syncExecutor;
 
+    private final AllBooksSubject allBooksSubject;
+
 
     @GetMapping
     public ResponseEntity<?> getAllBooks() {
@@ -38,10 +39,13 @@ public class BooksController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addBook(@RequestBody Map<String, Object> request) {
+    public String addBook(@RequestBody Map<String, Object> request) {
         CommandAddBook cmd = new CommandAddBook(request);
         asyncExecutor.executeCommand(cmd, context);
-        return new ResponseEntity<>(cmd.getResults(), HttpStatus.OK);
+
+        Book book = cmd.getResults();
+        allBooksSubject.notifyObservers(book);
+        return "Book saved [" + book.getId() + "] ";
     }
 
     @PutMapping("/{id}")
